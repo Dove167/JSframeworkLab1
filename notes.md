@@ -1,0 +1,7 @@
+# Learnings about Hono and Bun in this project:
+
+*   **Bun as the Runtime and Module Bundler**: Bun is used as the JavaScript runtime for executing the server and likely also for its module bundling capabilities, given the `.ts` files are directly run.
+*   **Hono as the Web Framework**: Hono is the chosen web framework for building the API, handling routing and request/response cycles.
+*   **Hono Middleware Usage**: The project demonstrates the use of Hono's middleware system, with `logger()` applied globally for request logging.
+*   **Bun's Native HTTP Server Integration**: Hono applications are designed to be compatible with the Web Fetch API, allowing them to be directly served by Bun's highly performant native HTTP server.
+*   **TypeScript Integration**: TypeScript is used for development, leveraging Bun's native TypeScript support, as indicated by `.ts` files and `@types/bun` dependency.
