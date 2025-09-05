@@ -6,4 +6,12 @@ $ git log --oneline
 
 Git log Lab 2:
 
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/JSFrameworks/FrameworksLab1/comp3330-expensetracker (main)
+$ git log --oneline
+27c466e (HEAD -> main, origin/main, origin/HEAD) Inserted screenshots for lab2
+ea8c697 Moved lab1 screenshots into Lab1Screenshots
+cc02d78 added content in git_log.txt
+09c9d77 lab1: bun + hono minimal server with routes
 
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/JSFrameworks/FrameworksLab1/comp3330-expensetracker (main)
+$
