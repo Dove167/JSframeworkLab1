@@ -1,3 +1,9 @@
+Git log Lab 1:
+
 jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/JSFrameworks/FrameworksLab1/comp3330-expensetracker (main)
 $ git log --oneline
 09c9d77 (HEAD -> main, origin/main) lab1: bun + hono minimal server with routes
+
+Git log Lab 2:
+
+
