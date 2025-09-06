@@ -14,3 +14,5 @@
 - Together, we explored API testing prototypes with curl, identifying how to properly set headers and send data for validation.
 - Made code changes to `server/routes/expenses.ts`: added `ok` and `err` helpers for consistent error payloads, updated 404 error returns to use `err(c, 'Not found', 404)` instead of direct c.json.
 
+# Learnings about Lab 3 2025-09-05 3:30PM:
+

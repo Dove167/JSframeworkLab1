@@ -3,10 +3,9 @@ import { Hono } from 'hono'
 import { z } from 'zod'
 import { zValidator } from '@hono/zod-validator'
 
-// Helpers for consistent error payloads (Part 5 improvement)
+// Example helpers (optional) — place at top of server/routes/expenses.ts
 const ok = <T>(c: any, data: T, status = 200) => c.json({ data }, status)
 const err = (c: any, message: string, status = 400) => c.json({ error: { message } }, status)
-
 // In‑memory DB for Week 2 (we'll replace with Postgres in Week 4)
 const expenses: Expense[] = [
   { id: 1, title: 'Coffee', amount: 4 },
@@ -34,7 +33,7 @@ export const expensesRoute = new Hono()
   .get('/:id{\\d+}', (c) => {
     const id = Number(c.req.param('id'))
     const item = expenses.find((e) => e.id === id)
-    if (!item) return err(c, 'Not found', 404)
+    if (!item) return c.json({ error: 'Not found' }, 404)
     return c.json({ expense: item })
   })
 
@@ -51,7 +50,7 @@ export const expensesRoute = new Hono()
   .delete('/:id{\\d+}', (c) => {
     const id = Number(c.req.param('id'))
     const idx = expenses.findIndex((e) => e.id === id)
-    if (idx === -1) return err(c, 'Not found', 404)
+    if (idx === -1) return c.json({ error: 'Not found' }, 404)
     const [removed] = expenses.splice(idx, 1)
     return c.json({ deleted: removed })
   })
