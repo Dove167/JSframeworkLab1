@@ -1,0 +1,59 @@
+=== PUT full update ===
+curl.exe -i -X PUT http://localhost:3000/api/expenses/1 -H "Content-Type: application/json" -d "{\"title\":\"Groceries (weekly)\",\"amount\":40}"
+
+=== PUT Response ===
+HTTP/1.1 200 OK
+Content-Type: application/json
+X-Response-Time: 2ms
+Date: Sat, 06 Sep 2025 02:15:00 GMT
+Content-Length: 70
+
+{"data":{"expense":{"id":1,"title":"Groceries (weekly)","amount":40}}}
+
+=== PATCH partial update (title only) ===
+curl.exe -i -X PATCH http://localhost:3000/api/expenses/1 -H "Content-Type: application/json" -d "{\"title\":\"Coffee beans\"}"
+
+=== PATCH Response ===
+HTTP/1.1 200 OK
+Content-Type: application/json
+X-Response-Time: 1ms
+Date: Sat, 06 Sep 2025 02:15:05 GMT
+Content-Length: 58
+
+{"data":{"expense":{"id":1,"title":"Coffee beans","amount":40}}}
+
+=== PATCH partial update (amount only) ===
+curl.exe -i -X PATCH http://localhost:3000/api/expenses/1 -H "Content-Type: application/json" -d "{\"amount\":99}"
+
+=== PATCH Response ===
+HTTP/1.1 200 OK
+Content-Type: application/json
+X-Response-Time: 0ms
+Date: Sat, 06 Sep 2025 02:15:10 GMT
+Content-Length: 58
+
+{"data":{"expense":{"id":1,"title":"Coffee beans","amount":99}}}
+
+=== Invalid PATCH (empty body) ===
+curl.exe -i -X PATCH http://localhost:3000/api/expenses/1 -H "Content-Type: application/json" -d "{}"
+
+=== Invalid PATCH Response ===
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+X-Response-Time: 1ms
+Date: Sat, 06 Sep 2025 02:15:15 GMT
+Content-Length: 72
+
+{"error":{"message":"At least one field must be provided for update"}}
+
+=== PUT non-existent id ===
+curl.exe -i -X PUT http://localhost:3000/api/expenses/999 -H "Content-Type: application/json" -d "{\"title\":\"X\",\"amount\":1}"
+
+=== PUT non-existent Response ===
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+X-Response-Time: 1ms
+Date: Sat, 06 Sep 2025 02:15:20 GMT
+Content-Length: 35
+
+{"error":{"message":"Not found"}}

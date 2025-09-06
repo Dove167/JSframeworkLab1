@@ -14,5 +14,13 @@
 - Together, we explored API testing prototypes with curl, identifying how to properly set headers and send data for validation.
 - Made code changes to `server/routes/expenses.ts`: added `ok` and `err` helpers for consistent error payloads, updated 404 error returns to use `err(c, 'Not found', 404)` instead of direct c.json.
 
-# Learnings about Lab 3 2025-09-05 3:30PM:
+# Learnings about Lab 3 2025-09-05 7:06PM:
+
+- **PUT vs PATCH**: PUT replaces entire resources completely (replaces all fields), while PATCH applies partial updates (only modifies provided fields)
+- **HTTP Semantics**: PUT is idempotent (multiple identical calls = same result), PATCH might not be if it uses relative operations like increment/decrement
+- **Validation**: Both use Zod schemas, but PUT requires all fields while PATCH uses optional fields with refinement validation
+- **PowerShell Issues**: Encountered quoting problems with curl.exe on Windows, requiring careful escaping of JSON strings in PowerShell
+- **Error Handling**: Properly returning 400 for validation errors and 404 for non-existent resources, with consistent error message format
+- **Middleware Integration**: Hono's zod-validator middleware works well for automatic JSON parsing and validation before route handlers
+- **Fixed corrupted bun cache**: rm -rf node_modules bun.lock, bun install --no-cache --backend=copyfile
 
