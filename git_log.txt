@@ -15,3 +15,18 @@ cc02d78 added content in git_log.txt
 
 jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/JSFrameworks/FrameworksLab1/comp3330-expensetracker (main)
 $
+
+Git log lab 3:
+
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/JSFrameworks/FrameworksLab1/comp3330-expensetracker (lab-3-backup)
+$ git log --oneline
+11eae7f (HEAD -> lab-3-backup, origin/lab-3-backup) Lab 3 progress
+0fe4a29 (origin/main, origin/HEAD, main) fixed corrupted bun cache
+df868d1 updated git_log.txt
+27c466e Inserted screenshots for lab2
+ea8c697 Moved lab1 screenshots into Lab1Screenshots
+cc02d78 added content in git_log.txt
+09c9d77 lab1: bun + hono minimal server with routes
+
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/JSFrameworks/FrameworksLab1/comp3330-expensetracker (lab-3-backup)
+$
