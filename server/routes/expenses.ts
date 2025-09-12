@@ -2,15 +2,13 @@
 import { Hono } from 'hono'
 import { z } from 'zod'
 import { zValidator } from '@hono/zod-validator'
+import { db, schema } from '../db/client'
+import { eq } from 'drizzle-orm'
 
 const ok = <T>(c: any, data: T, status = 200) => c.json({ data }, status)
 const err = (c: any, message: string, status = 400) => c.json({ error: { message } }, status)
 
-// In‑memory DB for Week 2 (we'll replace with Postgres in Week 4)
-const expenses: Expense[] = [
-  { id: 1, title: 'Coffee', amount: 4 },
-  { id: 2, title: 'Groceries', amount: 35 },
-]
+const { expenses } = schema
 
 // Zod schemas
 const expenseSchema = z.object({
@@ -29,61 +27,52 @@ const updateExpenseSchema = z.object({
   message: 'At least one field must be provided for update',
 })
 
-export type Expense = z.infer<typeof expenseSchema>
-
 // Router
 export const expensesRoute = new Hono()
-  // GET /api/expenses → list
-  .get('/', (c) => ok(c, { expenses }))
+// GET /api/expenses → list
+  .get('/', async (c) => {
+    const rows = await db.select().from(expenses)
+    return ok(c, { expenses: rows })
+  })
 
   // GET /api/expenses/:id → single item
   // Enforce numeric id with a param regex (\\d+)
-  .get('/:id{\\d+}', (c) => {
+  .get('/:id{\\d+}', async (c) => {
     const id = Number(c.req.param('id'))
-    const item = expenses.find((e) => e.id === id)
-    if (!item) return err(c, 'Not found', 404)
-    return ok(c, { expense: item })
+    const [row] = await db.select().from(expenses).where(eq(expenses.id, id)).limit(1)
+    if (!row) return err(c, 'Not found', 404)
+    return ok(c, { expense: row })
   })
 
   // POST /api/expenses → create (validated)
-  .post('/', zValidator('json', createExpenseSchema), (c) => {
+  .post('/', zValidator('json', createExpenseSchema), async (c) => {
     const data = c.req.valid('json') // { title, amount }
-    const nextId = (expenses.at(-1)?.id ?? 0) + 1
-    const created: Expense = { id: nextId, ...data }
-    expenses.push(created)
+    const [created] = await db.insert(expenses).values(data).returning()
     return ok(c, { expense: created }, 201)
   })
 
   // DELETE /api/expenses/:id → remove
-  .delete('/:id{\\d+}', (c) => {
+  .delete('/:id{\\d+}', async (c) => {
     const id = Number(c.req.param('id'))
-    const idx = expenses.findIndex((e) => e.id === id)
-    if (idx === -1) return err(c, 'Not found', 404)
-    const [removed] = expenses.splice(idx, 1)
-    return ok(c, { deleted: removed })
+    const [deletedRow] = await db.delete(expenses).where(eq(expenses.id, id)).returning()
+    if (!deletedRow) return err(c, 'Not found', 404)
+    return ok(c, { deleted: deletedRow })
   })
 
   // PUT /api/expenses/:id → full replace
-  expensesRoute.put('/:id{\\d+}', zValidator('json', createExpenseSchema), (c) => {
+  .put('/:id{\\d+}', zValidator('json', createExpenseSchema), async (c) => {
     const id = Number(c.req.param('id'))
-    const idx = expenses.findIndex((e) => e.id === id)
-    if (idx === -1) return err(c, 'Not found', 404)
-
     const data = c.req.valid('json')
-    const updated: Expense = { id, ...data }
-    expenses[idx] = updated
+    const [updated] = await db.update(expenses).set(data).where(eq(expenses.id, id)).returning()
+    if (!updated) return err(c, 'Not found', 404)
     return ok(c, { expense: updated })
   })
 
   // PATCH /api/expenses/:id → partial update
-  expensesRoute.patch('/:id{\\d+}', zValidator('json', updateExpenseSchema), (c) => {
+  .patch('/:id{\\d+}', zValidator('json', updateExpenseSchema), async (c) => {
     const id = Number(c.req.param('id'))
-    const idx = expenses.findIndex((e) => e.id === id)
-    if (idx === -1) return err(c, 'Not found', 404)
-
-    const data = c.req.valid('json')
-    const current = expenses[idx]
-    const updated = { ...current, ...data } as Expense
-    expenses[idx] = updated
+    const patch = c.req.valid('json')
+    const [updated] = await db.update(expenses).set(patch).where(eq(expenses.id, id)).returning()
+    if (!updated) return err(c, 'Not found', 404)
     return ok(c, { expense: updated })
   })
