@@ -1,0 +1,15 @@
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/term3FSWD/JSFrameworks/FrameworksLab1/comp3330-expensetracker (main)
+$ git log --oneline
+2f107c0 (HEAD -> main, origin/main, origin/HEAD) updated notes.md
+9876391 Lab 5 frontend completed
+a69095a updated lab 4 submission
+d6a4754 updated notes.md
+86f35ab Lab 4 steps 1 to 7 complete
+d8f2f59 Merge pull request #1 from Dove167/lab-3-backup
+ff5ccb0 (origin/lab-3-backup, lab-3-backup) Fixed Lab 3 submission
+11eae7f Lab 3 progress
+0fe4a29 fixed corrupted bun cache
+df868d1 updated git_log.txt
+27c466e Inserted screenshots for lab2
+ea8c697 Moved lab1 screenshots into Lab1Screenshots
+cc02d78 added content in git_log.txt
