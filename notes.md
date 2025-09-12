@@ -24,3 +24,11 @@
 - **Middleware Integration**: Hono's zod-validator middleware works well for automatic JSON parsing and validation before route handlers
 - **Fixed corrupted bun cache**: rm -rf node_modules bun.lock, bun install --no-cache --backend=copyfile
 
+# Learnings about Lab 4 2025-09-12 2:35PM:
+
+- **In-Memory to Database Transition**: Replaced local JavaScript array operations (find, push, splice, findIndex) with Drizzle ORM database queries using db.select(), db.insert(), db.update(), and db.delete() with proper WHERE clauses using eq() for ID filtering
+- **Async/Await Integration**: All route handlers now use async/await for database operations, replacing synchronous array methods that were blocking the event loop
+- **Schema Integration**: Added imports for db client and schema from '../db/client', destructuring { expenses } from schema for type-safe table references
+- **Returning Clauses**: Database operations use .returning() to get created/updated/deleted rows, replacing manual object construction and array manipulation
+- **Gotcha - Curl Testing**: PowerShell curl.exe had JSON escaping issues with parentheses in strings; Git Bash curl worked reliably with multi-line syntax and single quotes for JSON data
+- **Error Handling Consistency**: Maintained ok/err helper functions for uniform response format while adapting 404 checks from array existence to database result length
