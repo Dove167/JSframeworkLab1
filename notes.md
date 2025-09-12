@@ -32,3 +32,12 @@
 - **Returning Clauses**: Database operations use .returning() to get created/updated/deleted rows, replacing manual object construction and array manipulation
 - **Gotcha - Curl Testing**: PowerShell curl.exe had JSON escaping issues with parentheses in strings; Git Bash curl worked reliably with multi-line syntax and single quotes for JSON data
 - **Error Handling Consistency**: Maintained ok/err helper functions for uniform response format while adapting 404 checks from array existence to database result length
+
+# Learnings about Lab 5 2025-09-12 4:31PM:
+
+- **Vite + React + TypeScript Setup**: Successfully scaffolded Vite React TS app with bun create vite, configured path alias "@" for src/ imports, and integrated TypeScript path mappings in tsconfig.json for module resolution
+- **TailwindCSS Configuration**: Set up Tailwind via PostCSS with proper content paths including src/components for ShadCN, learned that Tailwind processing happens through postcss.config.js rather than explicit Vite plugins
+- **Vite Config Plugin Issue**: Initial vite.config.ts with tailwindcss() plugin caused TypeScript errors; resolved by removing it since TailwindCSS is handled via PostCSS configuration, keeping only React plugin and path alias
+- **ShadCN UI Integration**: Used npx shadcn@latest (bunx failed due to source-map dependency issues) to initialize with New York style and Stone base color, successfully added button, card, and input components to src/components/ui/
+- **Windows Development Challenges**: Encountered EPERM permission errors with Vite's .vite/deps cache in OneDrive folder, resolved by manually clearing node_modules/.vite directory; Node.js version warning (20.17.0 vs required 20.19+) but server still ran successfully
+- **Component Architecture**: Created reusable AppCard component using ShadCN Card with proper import structure; learned relative imports work reliably while "@" alias required TypeScript server restart to resolve in VSCode
