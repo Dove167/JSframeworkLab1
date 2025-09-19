@@ -41,3 +41,13 @@
 - **ShadCN UI Integration**: Used npx shadcn@latest (bunx failed due to source-map dependency issues) to initialize with New York style and Stone base color, successfully added button, card, and input components to src/components/ui/
 - **Windows Development Challenges**: Encountered EPERM permission errors with Vite's .vite/deps cache in OneDrive folder, resolved by manually clearing node_modules/.vite directory; Node.js version warning (20.17.0 vs required 20.19+) but server still ran successfully
 - **Component Architecture**: Created reusable AppCard component using ShadCN Card with proper import structure; learned relative imports work reliably while "@" alias required TypeScript server restart to resolve in VSCode
+
+# Learnings about Lab 6 2025-09-19 2:45PM
+
+- **TanStack Query Integration**: Successfully connected React frontend to Hono backend API using QueryClientProvider, useQuery for fetching/caching expenses list, and useMutation for creating new expenses with automatic cache invalidation on success
+- **CORS Configuration**: Encountered browser CORS errors when frontend (localhost:5173) tried to fetch from backend (localhost:3000); resolved by adding Hono's cors() middleware to server/app.ts with proper origin, methods (GET, POST, PUT, PATCH, DELETE, OPTIONS), and headers configuration
+- **Loading and Error States**: Implemented proper loading states ("Loading…") and error handling in useQuery, with the component gracefully showing error messages when fetch requests fail
+- **Automatic UI Updates**: useMutation's onSuccess callback invalidates the ['expenses'] query key, causing useQuery to automatically refetch and update the UI when new expenses are created via the form
+- **Data Persistence**: Expenses data persists across browser sessions (including incognito mode) because it's stored in the PostgreSQL database via Drizzle ORM, not just in browser memory or localStorage
+- **Development Workflow**: Restarting backend server required after CORS middleware changes; frontend hot reload handled TanStack Query updates automatically, but full page refresh needed to clear failed fetch states
+
