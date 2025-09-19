@@ -1,0 +1,11 @@
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/term3FSWD/JSFrameworks/FrameworksLab1/comp3330-expensetracker (main)
+$ curl -i http://localhost:3000/api/expenses
+HTTP/1.1 200 OK
+Content-Type: application/json
+X-Response-Time: 588ms
+Date: Fri, 19 Sep 2025 21:28:22 GMT
+Content-Length: 24
+
+{"data":{"expenses":[]}}
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/term3FSWD/JSFrameworks/FrameworksLab1/comp3330-expensetracker (main)
+$
