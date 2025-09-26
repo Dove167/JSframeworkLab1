@@ -1,0 +1,15 @@
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/term3FSWD/JSFrameworks/FrameworksLab1/comp3330-expensetracker (main)
+$ bun run dev
+$ bun --hot server/index.ts
+🚀 Server running on http://localhost:3000
+Started development server: http://localhost:3000
+<-- GET /api/expenses
+--> GET /api/expenses 200 601ms
+<-- GET /api/expenses
+--> GET /api/expenses 200 38ms
+<-- OPTIONS /api/expenses
+--> OPTIONS /api/expenses 204 2ms
+<-- POST /api/expenses
+--> POST /api/expenses 201 64ms
+<-- GET /api/expenses
+--> GET /api/expenses 200 28ms
