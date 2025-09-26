@@ -5,9 +5,9 @@ export function ExpensesList() {
     queryKey: ['expenses'],
     queryFn: async () => {
       const res = await fetch('http://localhost:3000/api/expenses')
-      if (!res.ok) throw new Error('Failed to fetch expenses')
-      return res.json() as Promise<{ data: { expenses: { id: number; title: string; amount: number }[] } }>
-    },
+      if (!res.ok) throw new Error('Failed to fetch')
+      return res.json() as Promise<{ expenses: { id: number; title: string; amount: number }[] }>
+    }
   })
 
   if (isLoading) return <p className="text-sm text-gray-500">Loading…</p>
@@ -15,10 +15,10 @@ export function ExpensesList() {
 
   return (
     <ul className="mt-4 space-y-2">
-      {data!.data.expenses.map((e) => (
-        <li key={e.id} className="flex items-center justify-between rounded border bg-white p-3 shadow-sm">
-          <span className="font-medium">{e.title}</span>
-          <span className="tabular-nums">${e.amount}</span>
+      {data!.expenses.map(e => (
+        <li key={e.id} className="flex justify-between rounded border p-2 bg-white">
+          <span>{e.title}</span>
+          <span>${e.amount}</span>
         </li>
       ))}
     </ul>
