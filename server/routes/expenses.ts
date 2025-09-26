@@ -32,7 +32,7 @@ export const expensesRoute = new Hono()
 // GET /api/expenses → list
   .get('/', async (c) => {
     const rows = await db.select().from(expenses)
-    return ok(c, { expenses: rows })
+    return c.json({ expenses: rows })
   })
 
   // GET /api/expenses/:id → single item
@@ -48,7 +48,7 @@ export const expensesRoute = new Hono()
   .post('/', zValidator('json', createExpenseSchema), async (c) => {
     const data = c.req.valid('json') // { title, amount }
     const [created] = await db.insert(expenses).values(data).returning()
-    return ok(c, { expense: created }, 201)
+    return c.json({ expense: created }, 201)
   })
 
   // DELETE /api/expenses/:id → remove

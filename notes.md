@@ -50,4 +50,14 @@
 - **Automatic UI Updates**: useMutation's onSuccess callback invalidates the ['expenses'] query key, causing useQuery to automatically refetch and update the UI when new expenses are created via the form
 - **Data Persistence**: Expenses data persists across browser sessions (including incognito mode) because it's stored in the PostgreSQL database via Drizzle ORM, not just in browser memory or localStorage
 - **Development Workflow**: Restarting backend server required after CORS middleware changes; frontend hot reload handled TanStack Query updates automatically, but full page refresh needed to clear failed fetch states
+# Learnings about Lab 7 2025-09-26 10:16AM
+
+- **TanStack Query Setup**: Installed @tanstack/react-query v5.90.2 and configured QueryClientProvider in main.tsx with default options (5s stale time, 1 retry) to enable caching and state management across the React app
+- **useQuery Implementation**: Created ExpensesList component using useQuery hook to fetch expenses from /api/expenses with proper loading ("Loading…") and error state handling, displaying data in a clean list format
+- **useMutation for Data Creation**: Implemented AddExpenseForm component with useMutation for POST requests, including form state management (title/amount), validation, and automatic cache invalidation on successful submission
+- **Cache Invalidation Strategy**: Used queryClient.invalidateQueries({ queryKey: ['expenses'] }) in mutation's onSuccess callback to automatically refresh the expenses list when new items are added, ensuring UI consistency
+- **API Response Format Alignment**: Modified backend GET/POST endpoints to return direct { expenses: [...] } and { expense: {...} } format instead of nested { data: {...} } to match TanStack Query expectations and simplify component logic
+- **End-to-End Testing**: Verified complete data flow from backend API through TanStack Query caching to frontend UI, confirming that expense creation triggers automatic list updates and proper error handling throughout the stack
+
+
 

@@ -1,0 +1,14 @@
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/term3FSWD/JSFrameworks/FrameworksLab1/comp3330-expensetracker (main)
+$ cd frontend
+
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/term3FSWD/JSFrameworks/FrameworksLab1/comp3330-expensetracker/frontend (main)
+$ curl http://localhost:3000/api/expenses
+{"expenses":[{"id":2,"title":"Netflix","amount":7}]}
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/term3FSWD/JSFrameworks/FrameworksLab1/comp3330-expensetracker/frontend (main)
+$ curl -X POST http://localhost:3000/api/expenses -H "Content-Type: application/json" -d '{"title":"Coffee","amount":5}'
+{"expense":{"id":3,"title":"Coffee","amount":5}}
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/term3FSWD/JSFrameworks/FrameworksLab1/comp3330-expensetracker/frontend (main)
+$ curl http://localhost:3000/api/expenses
+{"expenses":[{"id":2,"title":"Netflix","amount":7},{"id":3,"title":"Coffee","amount":5}]}
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/term3FSWD/JSFrameworks/FrameworksLab1/comp3330-expensetracker/frontend (main)
+$
