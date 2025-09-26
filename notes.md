@@ -50,6 +50,7 @@
 - **Automatic UI Updates**: useMutation's onSuccess callback invalidates the ['expenses'] query key, causing useQuery to automatically refetch and update the UI when new expenses are created via the form
 - **Data Persistence**: Expenses data persists across browser sessions (including incognito mode) because it's stored in the PostgreSQL database via Drizzle ORM, not just in browser memory or localStorage
 - **Development Workflow**: Restarting backend server required after CORS middleware changes; frontend hot reload handled TanStack Query updates automatically, but full page refresh needed to clear failed fetch states
+
 # Learnings about Lab 7 2025-09-26 10:16AM
 
 - **TanStack Query Setup**: Installed @tanstack/react-query v5.90.2 and configured QueryClientProvider in main.tsx with default options (5s stale time, 1 retry) to enable caching and state management across the React app
@@ -59,5 +60,12 @@
 - **API Response Format Alignment**: Modified backend GET/POST endpoints to return direct { expenses: [...] } and { expense: {...} } format instead of nested { data: {...} } to match TanStack Query expectations and simplify component logic
 - **End-to-End Testing**: Verified complete data flow from backend API through TanStack Query caching to frontend UI, confirming that expense creation triggers automatic list updates and proper error handling throughout the stack
 
+# Learnings about Lab 8 2025-09-26 10:47AM
 
+1. **File-Based Routing**: TanStack Router automatically creates routes from file structure - just create files in routes/ directory and they're registered
+2. **Layout with Outlet**: App.tsx became a shared layout using Outlet component instead of containing all UI logic directly
+3. **Nested Routes**: Created nested routes like /expenses/:id using file naming convention (expenses.detail.tsx for expense detail pages)
+4. **Route Parameters**: Used useParams() hook to access dynamic route parameters like expenseId from URLs
+5. **Link Navigation**: Replaced anchor tags with Link components for client-side routing with proper active states
+6. **Error Boundaries**: Added defaultNotFoundComponent and defaultErrorComponent for better UX on missing pages and errors
 
