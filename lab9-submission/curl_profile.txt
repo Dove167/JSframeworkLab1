@@ -1,0 +1,13 @@
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/term3FSWD/JSFrameworks/FrameworksLab1/comp3330-expensetracker (main)
+$ curl -i http://localhost:3000/api/secure/profile -H "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjQ4OjlmOmZhOjMwOjc4OjljOjRkOjBjOjVmOjhiOjU0OjgzOjk3OjczOjUzOjU0IiwidHlwIjoiSldUIn0.eyJhdWQiOlsiYXBpOi8vZGVmYXVsdCJdLCJhenAiOiI0YjQ4ZDNmMGVjODg0M2MxYWM4ODg3ZmU4OThkN2UyMyIsImV4cCI6MTc1OTA5NDk3MiwiaWF0IjoxNzU5MDA4NTcxLCJpc3MiOiJodHRwczovL2pvc2hleHBlbnNldHJhY2tlci5raW5kZS5jb20iLCJqdGkiOiI0MGYwMTM2Ni0yNmNhLTQyNjYtYmJmNi0xODA5MWE5NjFiZTUiLCJvcmdfY29kZSI6Im9yZ18yYTQwZmIxNWJkMCIsInBlcm1pc3Npb25zIjpbXSwic2NwIjpbImVtYWlsIiwicHJvZmlsZSIsIm9wZW5pZCIsIm9mZmxpbmUiXSwic3ViIjoia3BfMWJkNTI5MDQ5MjYwNDQwY2I4OGQ4ZGFjZDI4MmUxMGQifQ.Qa-E-7pmbLtG6R5iXtRR47GPN6IXbVA-1tu-OhfZeW1Z3fyESnhP4RCAAT1Oo3CKjnk7Og5NN8JI-61lD4Vzt-a148H6jpCTtiP1ifCjpmyCU-KgTKecrAi1aiVY5e8jPCVrFkfVRFWFz1r4FQN2zk5sCkWxgqv65Y-rwIhE-QMUPLwy-hND6ATrSjwJxfAoA3jndfJX9Eev-MfyVjWaQRK57VK0zWMQf6AUoVk4nzsUMHIEIm37Wuh_-eZ66m4fqaOGizTY_qJ6VMvsv9rBDesxyfgee8RRrusTypyuNMfo90iUq659Mr7l9QPO1WwgvblH1pq3JgIih5YJSzUhDg"
+HTTP/1.1 200 OK
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Content-Type: application/json
+X-Response-Time: 273ms
+Date: Sat, 27 Sep 2025 21:37:02 GMT
+Content-Length: 334
+
+{"user":{"aud":["api://default"],"azp":"4b48d3f0ec8843c1ac8887fe898d7e23","exp":1759094972,"iat":1759008571,"iss":"https://joshexpensetracker.kinde.com","jti":"40f01366-26ca-4266-bbf6-18091a961be5","org_code":"org_2a40fb15bd0","permissions":[],"scp":["email","profile","openid","offline"],"sub":"kp_1bd529049260440cb88d8dacd282e10d"}}
+jpfaj@Pandora MINGW64 ~/OneDrive/Desktop/term3FSWD/JSFrameworks/FrameworksLab1/comp3330-expensetracker (main)
+$

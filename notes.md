@@ -68,4 +68,17 @@
 4. **Route Parameters**: Used useParams() hook to access dynamic route parameters like expenseId from URLs
 5. **Link Navigation**: Replaced anchor tags with Link components for client-side routing with proper active states
 6. **Error Boundaries**: Added defaultNotFoundComponent and defaultErrorComponent for better UX on missing pages and errors
+# Learnings about Lab 9 2025-09-27 2:42PM
+
+- **Kinde Authentication Integration**: Successfully implemented complete Kinde authentication flow including SPA app creation, environment variable configuration, React SDK integration, and JWT verification middleware using JOSE library
+- **Frontend Authentication UI**: Created AuthBar component with login/logout functionality and user display, integrated KindeProvider wrapper in main.tsx, and built Profile component for testing protected API calls
+- **Backend JWT Verification**: Implemented robust JWT verification using jose library with remote JWKS fetching, proper error handling for missing/invalid tokens, and middleware integration in Hono routes
+- **Environment Configuration**: Set up both frontend (.env.local) and backend (.env) environment files with Kinde credentials (issuer URL, client ID, audience, redirect URIs) following security best practices
+- **Protected API Routes**: Created /api/secure/profile endpoint that requires valid Bearer token, returns user claims from decoded JWT, and handles CORS properly for frontend calls
+- **Bearer Token Extraction**: Successfully extracted JWT from browser Network tab for curl testing, verified API works with direct HTTP requests using Authorization header
+- **Debugging Challenges**: Overcame initial JWT verification issues with audience configuration, resolved TypeScript context typing with Hono's c.set() method, and fixed authentication flow integration
+- **Testing Strategy**: Validated complete auth flow from Kinde login → token generation → frontend API calls → backend verification → protected data return, ensuring all components work together seamlessly
+- **Submission Preparation**: Generated curl_profile.txt with successful API test results and prepared lab9-submission structure with screenshots folder for final deliverables
+
+
 

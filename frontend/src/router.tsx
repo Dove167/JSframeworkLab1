@@ -3,6 +3,7 @@ import App from './App'
 import { ExpensesList } from './routes/expenses.list'
 import { ExpenseDetail } from './routes/expenses.detail'
 import { NewExpense } from './routes/expenses.new'
+import { Profile } from './components/Profile'
 
 const rootRoute = createRootRoute({
   component: () => <App />,
@@ -18,6 +19,7 @@ const indexRoute = createRoute({
       <a href="/expenses" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
         View Expenses
       </a>
+      <Profile />
     </div>
   ),
 })

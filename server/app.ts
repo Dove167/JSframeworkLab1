@@ -3,6 +3,7 @@ import { Hono } from 'hono'
 import { logger } from 'hono/logger'
 import { cors } from 'hono/cors'
 import { expensesRoute } from './routes/expenses'
+import { secureRoute } from './routes/secure'
 
 export const app = new Hono()
 
@@ -32,3 +33,4 @@ app.get('/health', (c) => c.json({ status: 'healthy' }))
 
 // Mount API routes
 app.route('/api/expenses', expensesRoute)
+app.route('/api/secure', secureRoute)
