@@ -95,6 +95,8 @@
 - **File Upload Success Verification**: Successfully implemented complete flow: frontend → backend signed URL → S3 upload → database storage → UI update with file links
 - **Error Logging Enhancement**: Added comprehensive console logging throughout upload process to identify failures at each step (auth, URL generation, S3 upload, database save)
 
+# Learnings about Lab 11 2025-09-28 9:52PM
+
 
 
 
