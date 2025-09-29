@@ -6,7 +6,7 @@ export function ExpensesList() {
     queryFn: async () => {
       const res = await fetch('http://localhost:3000/api/expenses')
       if (!res.ok) throw new Error('Failed to fetch')
-      return res.json() as Promise<{ expenses: { id: number; title: string; amount: number }[] }>
+      return res.json() as Promise<{ expenses: { id: number; title: string; amount: number; fileUrl?: string }[] }>
     }
   })
 
@@ -19,6 +19,11 @@ export function ExpensesList() {
         <li key={e.id} className="flex justify-between rounded border p-2 bg-white">
           <span>{e.title}</span>
           <span>${e.amount}</span>
+          {e.fileUrl && (
+            <a href={e.fileUrl} target="_blank" rel="noopener noreferrer" className="ml-3 text-blue-600 underline">
+              View File
+            </a>
+          )}
         </li>
       ))}
     </ul>

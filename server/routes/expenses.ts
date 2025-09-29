@@ -15,6 +15,7 @@ const expenseSchema = z.object({
   id: z.number().int().positive(),
   title: z.string().min(3).max(100),
   amount: z.number().int().positive(),
+  fileUrl: z.string().optional(),
 })
 
 const createExpenseSchema = expenseSchema.omit({ id: true })

@@ -1,15 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Link, useRouter } from '@tanstack/react-router'
+import { UploadExpenseForm } from '../components/UploadExpenseForm'
 
 export function NewExpense() {
   const qc = useQueryClient()
   const router = useRouter()
   const [title, setTitle] = useState('')
   const [amount, setAmount] = useState<number | ''>('')
+  const [fileUrl, setFileUrl] = useState<string>('')
 
   const mutation = useMutation({
-    mutationFn: async (payload: { title: string; amount: number }) => {
+    mutationFn: async (payload: { title: string; amount: number; fileUrl?: string }) => {
       const res = await fetch('http://localhost:3000/api/expenses', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -38,7 +40,11 @@ export function NewExpense() {
         <form onSubmit={e => {
           e.preventDefault()
           if (title && typeof amount === 'number') {
-            mutation.mutate({ title, amount })
+            mutation.mutate({
+              title,
+              amount,
+              ...(fileUrl && { fileUrl })
+            })
           }
         }} className="space-y-4">
           <div>
@@ -70,14 +76,27 @@ export function NewExpense() {
             />
           </div>
 
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Receipt/Attachment (Optional)
+            </label>
+            <UploadExpenseForm onUploadComplete={setFileUrl} />
+            {fileUrl && (
+              <div className="mt-2 text-sm text-green-600 flex items-center">
+                <span>✓ File uploaded successfully!</span>
+              </div>
+            )}
+          </div>
+
           <div className="flex gap-2 pt-2">
-            <button
-              type="submit"
-              disabled={mutation.isPending || !title || amount === ''}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
-            >
-              {mutation.isPending ? 'Adding…' : 'Add Expense'}
-            </button>
+           <button
+             type="submit"
+             disabled={mutation.isPending || !title || amount === ''}
+             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+           >
+             {mutation.isPending ? 'Adding…' : 'Add Expense'}
+             {fileUrl && ' + File'}
+           </button>
 
             <Link
               to="/expenses"

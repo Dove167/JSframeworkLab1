@@ -80,5 +80,21 @@
 - **Testing Strategy**: Validated complete auth flow from Kinde login → token generation → frontend API calls → backend verification → protected data return, ensuring all components work together seamlessly
 - **Submission Preparation**: Generated curl_profile.txt with successful API test results and prepared lab9-submission structure with screenshots folder for final deliverables
 
+# Learnings about Lab 10 - File Uploads & S3 2025-09-28 8:00PM
+
+- **Environment Variable Mismatch**: S3 client configuration used DO_ACCESS_KEY_ID and DO_SECRET_ACCESS_KEY but .env file contained S3_ACCESS_KEY and S3_SECRET_KEY - fixed by updating server/lib/s3.ts to use correct variable names
+- **Missing CORS Configuration**: DigitalOcean Spaces bucket had no CORS rules, causing 403 "AccessDenied" errors when frontend tried to upload files - resolved by adding CORS configuration allowing localhost:5173 with PUT/GET methods
+- **Backend Server Not Running**: Initial "failed to fetch" errors were caused by backend server not being started - fixed by running bun run dev in server directory
+- **Debug Endpoint Issues**: AuthBar debug function was calling /api/secure instead of /api/secure/profile - corrected the endpoint URL to match actual route structure
+- **S3 Signed URL Expiry**: 60-second expiry was too short for upload process - increased to 300 seconds (5 minutes) to provide sufficient time
+- **Missing Content-Type Headers**: S3 uploads were missing proper Content-Type headers - added file.type to PUT requests for better compatibility
+- **Environment Variable Case Sensitivity**: S3 client initially looked for DO_ACCESS_KEY_ID but needed S3_ACCESS_KEY - updated to match .env file exactly
+- **Database Schema Integration**: Added fileUrl column to expenses table and ran database migrations to support file metadata storage
+- **Authentication Token Flow**: Frontend was getting valid JWT tokens from Kinde but initial requests failed due to missing backend server
+- **CORS Rule Specificity**: Initial CORS rules needed exact origin matching (http://localhost:5173) rather than wildcard patterns for development
+- **File Upload Success Verification**: Successfully implemented complete flow: frontend → backend signed URL → S3 upload → database storage → UI update with file links
+- **Error Logging Enhancement**: Added comprehensive console logging throughout upload process to identify failures at each step (auth, URL generation, S3 upload, database save)
+
+
 
 
