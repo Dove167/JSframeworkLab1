@@ -108,7 +108,7 @@ export function ExpensesList() {
               </a>
             )}
             <button
-              className="text-red-500 hover:text-red-700 text-sm px-2 py-1 rounded hover:bg-red-50 disabled:opacity-50"
+              className="text-red-500 hover:text-red-700 text-sm px-3 py-1 rounded border border-red-300 hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => delMutation.mutate(e.id)}
               disabled={delMutation.isPending}
             >

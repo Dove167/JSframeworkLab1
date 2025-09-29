@@ -1,6 +1,6 @@
 import { RouterProvider, createRouter, createRootRoute, createRoute } from '@tanstack/react-router'
 import App from './App'
-import { ExpensesList } from './routes/expenses.list'
+import { ExpensesListRoute } from './routes/expenses.list'
 import { ExpenseDetail } from './routes/expenses.detail'
 import { NewExpense } from './routes/expenses.new'
 import { Profile } from './components/Profile'
@@ -27,7 +27,7 @@ const indexRoute = createRoute({
 const expensesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/expenses',
-  component: () => <ExpensesList />,
+  component: () => <ExpensesListRoute />,
 })
 
 const expensesDetailRoute = createRoute({
