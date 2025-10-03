@@ -1,7 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { Link } from '@tanstack/react-router'
+import { useKindeAuth } from '@kinde-oss/kinde-auth-react'
 
 export function ExpensesList() {
   const qc = useQueryClient()
+  const { getToken } = useKindeAuth()
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['expenses'],
@@ -93,19 +96,49 @@ export function ExpensesList() {
       {data.expenses.map(e => (
         <li key={e.id} className="flex justify-between items-center rounded border p-3 bg-white shadow-sm">
           <div className="flex-1">
-            <span className="font-medium">{e.title}</span>
+            <Link
+              to="/expenses/$expenseId"
+              params={{expenseId: e.id}}
+            >
+              {e.title}
+            </Link>
             <span className="text-gray-600 ml-2">– ${e.amount}</span>
           </div>
           <div className="flex items-center space-x-2">
             {e.fileUrl && (
-              <a
-                href={e.fileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 text-sm underline"
+              <button
+                onClick={async () => {
+                  try {
+                    const token = await getToken()
+                    const response = await fetch(`http://localhost:3000/api/expenses/${e.id}/file-url`, {
+                      headers: {
+                        'Authorization': `Bearer ${token}`
+                      }
+                    })
+                    if (response.ok) {
+                      const { url } = await response.json()
+                      if (url) {
+                        // Use anchor click to bypass CORS
+                        const link = document.createElement('a')
+                        link.href = url
+                        link.target = '_blank'
+                        link.rel = 'noopener noreferrer'
+                        link.style.position = 'absolute'
+                        link.style.left = '-9999px'
+                        document.body.appendChild(link)
+                        link.click()
+                        document.body.removeChild(link)
+                      }
+                    }
+                  } catch (error) {
+                    console.error('Error getting file URL:', error)
+                    alert('Error accessing file')
+                  }
+                }}
+                className="text-blue-600 hover:text-blue-800 text-sm underline bg-transparent border-none cursor-pointer p-0"
               >
                 View File
-              </a>
+              </button>
             )}
             <button
               className="text-red-500 hover:text-red-700 text-sm px-3 py-1 rounded border border-red-300 hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed"

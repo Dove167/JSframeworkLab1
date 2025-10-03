@@ -4,6 +4,7 @@ import { ExpensesListRoute } from './routes/expenses.list'
 import { ExpenseDetail } from './routes/expenses.detail'
 import { NewExpense } from './routes/expenses.new'
 import { Profile } from './components/Profile'
+// import { useParams } from '@tanstack/react-router'
 
 const rootRoute = createRootRoute({
   component: () => <App />,
